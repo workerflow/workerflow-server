@@ -1,5 +1,7 @@
-import { Application } from 'express';
-import examplesRouter from './api/controllers/examples/router';
-export default function routes(app: Application): void {
-  app.use('/api/v1/examples', examplesRouter);
-}
+import { Application } from "express";
+
+import workflowsRouter from "./api/controllers/workflow/router";
+
+export default (app: Application) => {
+  app.use("/api/v1/workflows", workflowsRouter);
+};

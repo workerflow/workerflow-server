@@ -1,4 +1,5 @@
 import "./common/env";
+import "./common/database";
 
 import routes from "./routes";
 import Server from "./common/server";

@@ -1,4 +1,4 @@
-import { IWorkflow } from "../models/workflow";
+import { IWorkflow } from "../constants/workflow";
 
 class WorkflowService {
   list(): Promise<IWorkflow[]> {

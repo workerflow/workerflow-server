@@ -1,3 +1,3 @@
-# Workerflow Engine
+# Workerflow Server
 
-Implement the workflow core engine.
+Implement the workflow server.

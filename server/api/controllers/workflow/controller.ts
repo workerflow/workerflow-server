@@ -1,5 +1,6 @@
-import WorkflowService from "../../services/workflow.service";
 import { Request, Response } from "express";
+
+import WorkflowService from "../../services/workflow.service";
 
 export class Controller {
   list(_: Request, res: Response): void {

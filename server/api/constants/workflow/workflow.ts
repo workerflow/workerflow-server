@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 export interface IWorkflow {
-  id: number;
+  _id: string;
   name: string;
   version: string;
 }

@@ -1,8 +1,6 @@
 import os from "os";
-import path from "path";
 import http from "http";
 
-import bodyParser from "body-parser";
 import express, { Application } from "express";
 
 import l from "./logger";
@@ -13,15 +11,8 @@ const app = express();
 
 export default class ExpressServer {
   constructor() {
-    const root = path.normalize(__dirname + "/../..");
-    app.use(bodyParser.json({ limit: process.env.REQUEST_LIMIT || "100kb" }));
-    app.use(
-      bodyParser.urlencoded({
-        extended: true,
-        limit: process.env.REQUEST_LIMIT || "100kb",
-      }),
-    );
-    app.use(bodyParser.text({ limit: process.env.REQUEST_LIMIT || "100kb" }));
+    app.use(express.urlencoded({ extended: true }));
+    app.use(express.json());
   }
 
   router(routes: (app: Application) => void): ExpressServer {
@@ -35,7 +26,7 @@ export default class ExpressServer {
       (): void =>
         l.info(
           `up and running in ${process.env.NODE_ENV ||
-            "development"} @: ${os.hostname()} on port: ${p}}`,
+          "development"} @: ${os.hostname()} on port: ${p}}`,
         );
 
     http.createServer(app).listen(port, welcome(port));

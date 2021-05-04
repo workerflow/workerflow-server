@@ -4,7 +4,7 @@ class WorkflowService {
   list(): Promise<IWorkflow[]> {
     return Promise.resolve([
       {
-        id: 1,
+        _id: "wer",
         name: "test",
         version: "v1.0.0",
       },

@@ -5,7 +5,7 @@ import express, { Application } from "express";
 
 import l from "./logger";
 
-import errorHandler from "../api/middlewares/error.handler";
+import { errMiddleware } from "../api/middlewares";
 
 const app = express();
 
@@ -17,7 +17,7 @@ export default class ExpressServer {
 
   router(routes: (app: Application) => void): ExpressServer {
     routes(app);
-    app.use(errorHandler);
+    app.use(errMiddleware);
     return this;
   }
 

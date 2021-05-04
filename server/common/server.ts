@@ -1,23 +1,28 @@
-import os from "os";
-import http from "http";
+import os from 'os';
+import http from 'http';
 
-import express, { Application } from "express";
+import cors from 'cors';
+import compression from 'compression';
+import express, { Application } from 'express';
 
-import l from "./logger";
+import l from './logger';
 
-import { errMiddleware } from "../api/middlewares";
+import { responseMiddleware } from '../api/middlewares';
 
 const app = express();
 
 export default class ExpressServer {
   constructor() {
+    app.disable('x-powered-by');
     app.use(express.urlencoded({ extended: true }));
     app.use(express.json());
+    app.use(cors());
+    app.use(compression());
   }
 
   router(routes: (app: Application) => void): ExpressServer {
     routes(app);
-    app.use(errMiddleware);
+    app.use(responseMiddleware);
     return this;
   }
 

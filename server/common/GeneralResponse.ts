@@ -1,4 +1,4 @@
-import { getStatusCode } from 'http-status-codes';
+import { getStatusCode, getReasonPhrase } from 'http-status-codes';
 
 class GeneralResponse {
   phrase: string;
@@ -9,7 +9,11 @@ class GeneralResponse {
   constructor(phrase: string, reason?: string, message?: string) {
     this.phrase = phrase;
     this.message = message;
-    this.reason = reason;
+    if (reason === undefined) {
+      this.reason = getReasonPhrase(this.getCode());
+    } else {
+      this.reason = reason;
+    }
   }
 
   setData(data: object): GeneralResponse {

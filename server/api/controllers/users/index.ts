@@ -1,9 +1,11 @@
-import express from "express";
+import express from 'express';
 
-import controller from "./controller";
+import controller from './controller';
 import authMiddleware from '../../middlewares/auth';
 
 export default express.Router()
-  .post("/login", controller.login)
-  .post("/signup", controller.signup)
-  .get("/check", authMiddleware, controller.check)
+  .post("/action/login", controller.login)
+  .post("/action/signup", controller.signup)
+  .get("/action/check", authMiddleware, controller.check)
+  .get("/", authMiddleware, controller.list)
+  .get("/:id", authMiddleware, controller.get)

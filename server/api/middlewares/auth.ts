@@ -11,11 +11,11 @@ export default function jwtMiddleware(req: Request, res: Response, next: NextFun
   if (authHeader) {
     const token = authHeader.split(' ')[1];
     jwt.verify(token, process.env.JWT_SECRET || "test", { algorithm: ["HS512"] } as VerifyOptions,
-      (err: VerifyErrors | null, _user: object | undefined) => {
+      (err: VerifyErrors | null, user: object | undefined) => {
         if (err) {
           res.status(StatusCodes.UNAUTHORIZED).json(new GeneralResponse(ReasonPhrases.UNAUTHORIZED, ReasonTokenExpired, `token has expired`));
         } else {
-          next();
+          next(user);
         }
       });
   } else {

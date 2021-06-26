@@ -20,7 +20,7 @@ export class Controller {
       if (user == null) {
         next(new GeneralResponse(ReasonPhrases.UNAUTHORIZED, ReasonLoginPassword, `password or username is not correct`));
       } else {
-        bcrypt.compare(data.password, user.password, (err: Error, same: boolean) => {
+        bcrypt.compare(data.password, user.password, (err: Error | undefined, same: boolean) => {
           if (err) {
             console.log(same);
             next(new GeneralResponse(ReasonPhrases.BAD_REQUEST, ReasonUnknown, err.message));
